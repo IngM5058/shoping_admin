@@ -15,6 +15,7 @@ use Filament\Resources\Resource;
 use Filament\Support\Enums\MaxWidth;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TagsColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -51,7 +52,6 @@ class CategoryResource extends Resource
                     ->sortable()
                     ->searchable()
                     ->label('คำอธิบาย'),
-
             ])
             ->filters([
                 //
@@ -69,7 +69,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            ProductsRelationManager::class
+            ProductsRelationManager::class,
         ];
     }
 

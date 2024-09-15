@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
+use App\Filament\Resources\OrderResource\RelationManagers\ProductsRelationManager;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -58,7 +59,15 @@ class OrderResource extends Resource
                 TextColumn::make('status')
                     ->label('สถานะ')
                     ->sortable()
-                    ->searchable(),
+                    ->searchable()
+                    ->badge()
+                    ->color(fn (Order $record): string => match ($record->status) {
+                        'pending' => 'warning',
+                        'processing' => 'info',
+                        'completed' => 'success',
+                        'cancelled' => 'danger',
+                        default => 'secondary',
+                    }),
                 TextColumn::make('total_price')
                     ->label('ราคารวม')
                     ->sortable()
@@ -80,7 +89,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            ProductsRelationManager::class,
         ];
     }
 
