@@ -18,6 +18,7 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use App\Filament\Resources\OrderResource\Widgets\TopProductsChart;
 
 class OrderResource extends Resource
 {
@@ -101,6 +102,7 @@ class OrderResource extends Resource
         return [
             OrderOverview::class,
             CategorySaleChart::class,
+            TopProductsChart::class,
         ];
     }
 }
