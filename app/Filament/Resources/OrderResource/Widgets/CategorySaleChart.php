@@ -26,7 +26,6 @@ class CategorySaleChart extends ChartWidget
                 [
                     'label' => 'Sales',
                     'data' => $categorySales->pluck('total_sales')->toArray(),
-                    'backgroundColor' => $this->getColor(),
                 ],
             ],
             'labels' => $categorySales->pluck('name')->toArray(),
