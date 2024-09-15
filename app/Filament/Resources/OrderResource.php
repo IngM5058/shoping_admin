@@ -5,6 +5,7 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Filament\Resources\OrderResource\RelationManagers\ProductsRelationManager;
+use App\Filament\Resources\OrderResource\Widgets\OrderOverview;
 use App\Models\Order;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
@@ -59,15 +60,7 @@ class OrderResource extends Resource
                 TextColumn::make('status')
                     ->label('สถานะ')
                     ->sortable()
-                    ->searchable()
-                    ->badge()
-                    ->color(fn (Order $record): string => match ($record->status) {
-                        'pending' => 'warning',
-                        'processing' => 'info',
-                        'completed' => 'success',
-                        'cancelled' => 'danger',
-                        default => 'secondary',
-                    }),
+                    ->searchable(),
                 TextColumn::make('total_price')
                     ->label('ราคารวม')
                     ->sortable()
@@ -100,5 +93,17 @@ class OrderResource extends Resource
             'create' => Pages\CreateOrder::route('/create'),
             'edit' => Pages\EditOrder::route('/{record}/edit'),
         ];
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            OrderOverview::class,
+        ];
+    }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::count();
     }
 }
