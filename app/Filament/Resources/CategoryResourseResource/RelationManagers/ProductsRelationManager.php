@@ -46,7 +46,10 @@ class ProductsRelationManager extends RelationManager
             ->recordTitleAttribute('name')
             ->columns([
                 ImageColumn::make('image_url')
-                    ->label('รูปภาพ'),
+                    ->label('รูปภาพ')
+                    ->circular()
+                    ->width(40)
+                    ->height(40),
                 TextColumn::make('name')
                     ->label('ชื่อ'),
                 TextColumn::make('category.name')
